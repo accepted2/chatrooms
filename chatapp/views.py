@@ -57,6 +57,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
+            print(f" ${ user.username}User is registered")
             messages.success(request, "Registration is complete!")
             return redirect("login")
     else:
