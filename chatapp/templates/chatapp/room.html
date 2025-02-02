@@ -37,6 +37,7 @@
         <!-- Контейнер для формы -->
         <div class="chat-input-container px-3 pb-3" style="background-color: thistle; border-radius: 0 0 10px 10px;">
             <form method="post">
+                {% csrf_token %}
                 <div class="d-flex">
                     <input id="message-input" type="text" name="message" placeholder="Enter"
                         class="form-control flex-grow-1" />
