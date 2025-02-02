@@ -138,7 +138,7 @@ STATIC_URL = "static/"
 # MEDIA_URL = "/media/"
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),  # Убедитесь, что эта папка существует
+    os.path.join(BASE_DIR, "chatapp/static"),  # Убедитесь, что эта папка существует
 ]
 
 
