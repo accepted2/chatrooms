@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mb-3"
+    style="max-width: 30%; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);padding: 20px; border-radius: 10px; background-color: ghostwhite; margin-top: 30px;">
+    <h2 style="text-align: center;">Create new room</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label class="form-label">Room name</label>
+        <input class="form-control" name="name" type="text" required>
+        <button type="submit" class="btn btn-secondary" style="margin-top: 4px;">Create</button>
+    </form>
+</div>
+{% endblock %}

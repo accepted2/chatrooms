@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4" style="max-width: 80%; display: flex;">
+    <!-- Левая панель с чатами -->
+    <div class="chat-list"
+        style="width: 30%; background-color: #f3f3f3; padding: 15px; border-radius: 10px; overflow-y: auto; max-height: 900px;">
+        <h4>Чаты</h4>
+        {% for chat in chatrooms %}
+        <div class="chat-item" style="padding: 10px; border-bottom: 1px solid #ddd; cursor: pointer;"
+            onclick="location.href='{% url 'chatroom' chat.slug chat.id %}'">
+            <strong>{{ chat.name }}</strong>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- Основной чат -->
+    <div class="chat-container" style="width: 70%; margin-left: 20px;">
+        <!-- Заголовок чата -->
+        <div class="chat-header"
+            style="background-color: #91c788; padding: 15px; font-size: 18px; font-weight: bold; text-align: center; border-radius: 10px 10px 0 0;">
+            {{ chatroom.name }}
+        </div>
+        <!-- Контейнер сообщений -->
+        <div id="chat-messages" class="overflow-auto"
+            style="max-height: 700px; background-color: thistle; padding: 15px;">
+            {% for message in messages %}
+            <div class="message-container {% if message.user == request.user %} sent {% else %} received {% endif %}">
+                <div class="message-header">
+                    <strong style="color: rgb(109, 224, 109);">{{ message.user }}</strong>
+                    <span class="message-time">{{ message.date|date:"H:i" }}</span>
+                </div>
+                <div class="message-body">
+                    {{ message.message }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- Контейнер для формы -->
+        <div class="chat-input-container px-3 pb-3" style="background-color: thistle; border-radius: 0 0 10px 10px;">
+            <form method="post">
+                <div class="d-flex">
+                    <input id="message-input" type="text" name="message" placeholder="Enter"
+                        class="form-control flex-grow-1" />
+                    <button id="send-button" type="submit" class="btn btn-secondary btn-lg ml-2">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{ chatroom.slug|json_script:'json-chatroomname' }}
+{{ request.user.username|json_script:'json-username' }}
+<script>
+    const ChatRoomName = JSON.parse(document.getElementById('json-chatroomname').textContent);
+    const username = JSON.parse(document.getElementById('json-username').textContent);
+    const chatSocket = new WebSocket(
+        'ws://' + window.location.host + '/ws/' + ChatRoomName + '/'
+    );
+
+    chatSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        if (data.message) {
+            console.log('Received message to client id', data.message);
+            const messageClass = (data.username === username) ? 'sent' : 'received';
+
+            let html = `
+                <div class="message-container ${messageClass}">
+                    <div class="message-header">
+                        <strong style="color: rgb(109, 224, 109);">${data.username}</strong>
+                        <span class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                    </div>
+                    <div class="message-body">
+                        ${data.message}
+                    </div>
+                </div>`;
+
+            document.getElementById('chat-messages').innerHTML += html;
+            document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages')
+                .scrollHeight;
+        } else {
+            alert('NO message');
+        }
+    };
+
+    chatSocket.onclose = function(e) {
+        console.log('Socket is closed');
+    };
+
+    document.getElementById('send-button').onclick = function(e) {
+        e.preventDefault();
+        const messageInput = document.getElementById('message-input');
+        const message = messageInput.value;
+
+        chatSocket.send(JSON.stringify({
+            'message': message,
+            'username': username,
+            'room': ChatRoomName,
+        }));
+        messageInput.value = '';
+    };
+
+    window.onload = function() {
+        const chatMessages = document.getElementById('chat-messages');
+        if (chatMessages) {
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    };
+</script>
+{% endblock %}
