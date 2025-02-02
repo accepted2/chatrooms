@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-s1_1_nu0aj7f^e-d!)s2x$a1rdj$c00vw*5%e1+*_u+m6!zl$2
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["chatrooms-z6rm.onrender.com"]
 
 
 # Application definition
