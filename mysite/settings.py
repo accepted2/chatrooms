@@ -28,11 +28,19 @@ DEBUG = os.getenv("DEBUG", "False") == "True"
 
 
 ALLOWED_HOSTS = ["chatrooms-z6rm.onrender.com"]
+CORS_ALLOWED_ORIGINS = [
+    "https://chatrooms-z6rm.onrender.com",  # Разрешаем Origin для всех запросов с этого домена
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://chatrooms-z6rm.onrender.com",  # Разрешаем доверенные источники для CSRF
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -40,8 +48,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "channels",
-    "daphne",
     "chatapp",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -52,6 +60,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = "mysite.urls"
@@ -128,9 +138,9 @@ STATIC_URL = "static/"
 # MEDIA_URL = "/media/"
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    os.path.join(BASE_DIR, "chatapp", "static"),
+    os.path.join(BASE_DIR, "static"),  # Убедитесь, что эта папка существует
 ]
+
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, "media")  # Храните медиафайлы в отдельной папке
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
