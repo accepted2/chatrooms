@@ -57,9 +57,9 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            print(f" ${ user.username}User is registered")
+
             messages.success(request, "Registration is complete!")
-            return redirect("login")
+            return redirect("index")
     else:
         form = RegisterForm()
     return render(request, "chatapp/register.html", {"form": form})
