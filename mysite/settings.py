@@ -33,14 +33,15 @@ ALLOWED_HOSTS = ["chatrooms-z6rm.onrender.com"]
 # Application definition
 
 INSTALLED_APPS = [
-    "daphne",
-    "chatapp",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "channels",
+    "daphne",
+    "chatapp",
 ]
 
 MIDDLEWARE = [
