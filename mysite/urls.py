@@ -25,5 +25,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("chatapp.urls")),
 ]
-if settings.DEBUG is False:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

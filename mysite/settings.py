@@ -134,16 +134,17 @@ LOGOUT_REDIRECT_URL = "index"
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 
-STATIC_URL = "static/"
-# MEDIA_URL = "/media/"
+# settings.py
+STATIC_URL = "/static/"
 
+# Путь для сбора статических файлов
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+# Директории, где Django ищет статические файлы
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "chatapp/static"),  # Убедитесь, что эта папка существует
+    os.path.join(BASE_DIR, "chatapp/static"),  # Путь к папке с вашими статиками
 ]
 
-
-# MEDIA_ROOT = os.path.join(BASE_DIR, "media")  # Храните медиафайлы в отдельной папке
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
