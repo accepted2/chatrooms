@@ -1,0 +1,101 @@
+.message-container {
+    background-color: thistle;
+    max-width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sent {
+    max-width: 50%;
+    background-color: #4d97e5;
+    color: white;
+    align-self: flex-end;
+    text-align: right;
+    margin-left: auto;
+    border-top-right-radius: 0;
+}
+
+.received {
+    max-width: 50%;
+    background-color: #f1f1f1;
+    color: black;
+    align-self: flex-start;
+    text-align: left;
+    margin-right: auto;
+    border-top-left-radius: 0;
+}
+
+.received .message-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sent .message-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.message-header {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.sent .message-time {
+    font-size: 12px;
+    color: rgba(165, 53, 53, 0.8);
+    float: left;
+}
+
+.sent .message-body {
+    text-align: left;
+}
+
+.message-body {
+    word-wrap: break-word;
+    /* Переносит длинные слова */
+
+}
+
+.message-time {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    float: right;
+}
+
+.received .message-time {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.chat-input-container {
+    width: 100%;
+    /* Поле ввода на всю ширину */
+}
+
+.chat-header {
+    background-color: #ffffff;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+}
+
+
+#message-input {
+    flex-grow: 1;
+    /* Растягивает поле ввода на всю ширину */
+    height: 50px;
+    /* Увеличивает высоту поля ввода */
+    font-size: 16px;
+    /* Делает текст в поле больше */
+}
+
+#send-button {
+    height: 50px;
+    /* Увеличивает кнопку до высоты поля */
+    font-size: 16px;
+    /* Увеличивает текст в кнопке */
+}
