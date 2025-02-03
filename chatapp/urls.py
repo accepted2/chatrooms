@@ -11,5 +11,5 @@ urlpatterns = [
         name="login",
     ),
     path("logout/", views.logoutUser, name="logout"),
-    path("rooms/<slug:slug>/<int:room_id>/", views.chatroom, name="chatroom"),
+    path("rooms/<int:room_id>/", views.chatroom, name="chatroom"),
 ]
