@@ -18,7 +18,7 @@
                     <ul class="dropdown-menu">
                         {% for chatroom in chatrooms %}
                         <li>
-                            {{forloop.counter}}.<a href="{% url 'chatroom' chatroom.slug chatroom.id %}">
+                            {{forloop.counter}}.<a href="{% url 'chatroom'  chatroom.id %}">
                                 {{ chatroom.name }}</a>
                         </li>
                         {% endfor %}
