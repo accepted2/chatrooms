@@ -158,7 +158,7 @@
     const ChatRoomName = JSON.parse(document.getElementById('json-chatroomname').textContent);
     const username = JSON.parse(document.getElementById('json-username').textContent);
     const chatSocket = new WebSocket(
-        'ws://' + window.location.host + '/ws/' + ChatRoomName + '/' /// S
+        'wss://' + window.location.host + '/ws/' + ChatRoomName + '/' /// S
     );
 
     chatSocket.onmessage = function(e) {
