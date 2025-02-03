@@ -112,7 +112,7 @@
         <h4>Чаты</h4>
         {% for chat in chatrooms %}
         <div class="chat-item" style="padding: 10px; border-bottom: 1px solid #ddd; cursor: pointer;"
-            onclick="location.href='{% url 'chatroom' chat.slug chat.id %}'">
+            onclick="location.href='{% url 'chatroom'  chat.id %}'">
             <strong>{{ chat.name }}</strong>
         </div>
         {% endfor %}
