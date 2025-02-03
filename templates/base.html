@@ -20,8 +20,9 @@
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
-    <li id="error-messages" class="{{ message.tags }}" style="background-color: rgb(196, 92, 92); color: white;">
-        {{ message }}</li>
+    <li id="error-messages" class="{{ message.tags }}">
+        {{ message }}
+    </li>
     {% endfor %}
 </ul>
 <script>
