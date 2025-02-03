@@ -1,3 +1,8 @@
+body {
+    font-family: 'Comic Sans MS', 'Brush Script MT', cursive;
+}
+
+
 .message-container {
     background-color: thistle;
     max-width: 100%;
@@ -98,4 +103,43 @@
     /* Увеличивает кнопку до высоты поля */
     font-size: 16px;
     /* Увеличивает текст в кнопке */
+}
+
+/* //////////////////////////Messages */
+
+.messages {
+    list-style: none;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.messages .success {
+    background: #4caf50;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.messages .error {
+    background: #f44336;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.messages .info {
+    background: #2196f3;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#error-messages {
+    opacity: 1;
+    transition: opacity 1s ease-out;
+}
+
+#error-messages.hidden {
+    opacity: 0;
+
 }
