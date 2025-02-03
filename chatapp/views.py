@@ -32,7 +32,7 @@ def index(request):
 
 
 @login_required(login_url="login")
-def chatroom(request, slug, room_id):
+def chatroom(request, room_id):
     # chatroom = Chatroom.objects.get(slug=slug)
     chatrooms = Chatroom.objects.all()
     chatroom = get_object_or_404(Chatroom, id=room_id)

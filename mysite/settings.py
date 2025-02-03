@@ -27,7 +27,8 @@ SECRET_KEY = "django-insecure-s1_1_nu0aj7f^e-d!)s2x$a1rdj$c00vw*5%e1+*_u+m6!zl$2
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
 
-ALLOWED_HOSTS = ["chatrooms-z6rm.onrender.com"]
+ALLOWED_HOSTS = ["chatrooms-z6rm.onrender.com", "127.0.0.1", "localhost"]
+
 CORS_ALLOWED_ORIGINS = [
     "https://chatrooms-z6rm.onrender.com",  # Разрешаем Origin для всех запросов с этого домена
 ]
