@@ -17,6 +17,27 @@
 <body>
 </body>
 {% include 'navbar.html' %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li id="error-messages" class="{{ message.tags }}" style="background-color: rgb(196, 92, 92); color: white;">
+        {{ message }}</li>
+    {% endfor %}
+</ul>
+<script>
+    setTimeout(() => {
+
+        document.getElementById('error-messages').classList.add('hidden');
+
+        setTimeout(() => {
+            document.getElementById('error-messages').style.display = 'none';
+
+        }, 2000)
+
+
+    }, 5000)
+</script>
+{% endif %}
 {% block content %}
 {% endblock %}
 

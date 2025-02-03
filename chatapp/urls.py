@@ -1,15 +1,12 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
+from .views import CustomLoginView, logoutUser
 
 urlpatterns = [
     path("", views.index, name="index"),
     path("register/", views.register, name="register"),
-    path(
-        "login/",
-        auth_views.LoginView.as_view(template_name="chatapp/login.html"),
-        name="login",
-    ),
+    path("login/", CustomLoginView.as_view(), name="login"),
     path("logout/", views.logoutUser, name="logout"),
     path("rooms/<int:room_id>/", views.chatroom, name="chatroom"),
 ]
