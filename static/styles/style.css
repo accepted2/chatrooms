@@ -143,3 +143,41 @@ body {
     opacity: 0;
 
 }
+
+.notification-container {
+    position: fixed;
+    bottom: 150px;
+    /* Сдвигаем уведомления в нижнюю часть */
+    left: 20px;
+    z-index: 1000;
+    width: 300px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+.notification {
+    background-color: #506a58;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    height: 70px;
+    font-family: monospace;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+    max-height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+
+    word-wrap: break-word;
+    max-width: 100%;
+
+}
+
+.notification.hide {
+    opacity: 0;
+}

@@ -11,12 +11,16 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
     <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
+    <script src="{% static 'js/chat.js' %}"></script>
     <title>Document</title>
 </head>
 
 <body>
 </body>
 {% include 'navbar.html' %}
+<audio id="notification-sound" src="/static/sounds/notification.mp3"></audio>
+<audio id="sent-sound" src="/static/sounds/message-send.mp3"></audio>
+<div id="chat-notifications" class="notification-container"></div>
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
