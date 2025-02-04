@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (data.message) {
             console.log('Received message to client id', data.message);
             if (data.username !== username) {
-                if (!isInChat) {
+                if (isInChat) {
                     console.log("Not in chat, showing notification...");
                     showNotification(data.username, (data.room).replace(/-/g, ' ').replace(/\b\w/g, c => c
                         .toUpperCase()))
