@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const isInChat = CurrentPage.includes(`/rooms/${ChatRoomId}/`)
     console.log(isInChat)
     const chatSocket = new WebSocket(
-        'ws://' + window.location.host + '/ws/' + ChatRoomName + '/' /// S
+        'wss://' + window.location.host + '/ws/' + ChatRoomName + '/' /// S
     );
 
     chatSocket.onmessage = function (e) {
