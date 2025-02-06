@@ -18,9 +18,9 @@
 <body>
 </body>
 {% include 'navbar.html' %}
-<audio id="notification-sound" src="/static/sounds/notification.mp3"></audio>
-<audio id="sent-sound" src="/static/sounds/message-send.mp3"></audio>
-<div id="chat-notifications" class="notification-container"></div>
+<audio id="notification-sound" src="/static/sounds/notification.mp3" preload="auto"></audio>
+<audio id="sent-sound" src="/static/sounds/sent.mp3" preload="auto"></audio>
+<div id="chat-notifications"></div>
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}

@@ -8,8 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(ChatRoomName);
     const isInChat = CurrentPage.includes(`/rooms/${ChatRoomId}/`)
     console.log(isInChat)
+    const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
     const chatSocket = new WebSocket(
-        'wss://' + window.location.host + '/ws/' + ChatRoomName + '/' /// S
+        protocol + window.location.host + '/ws/' + ChatRoomName + '/'
     );
 
     chatSocket.onmessage = function (e) {
@@ -74,16 +75,19 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     function showNotification(sender, message) {
+        console.log('Показ уведомления для', sender, message); // Логируем вызов функции
         const notificationContainer = document.getElementById('chat-notifications');
         const notification = document.createElement('div');
         notification.classList.add('notification');
         notification.innerHTML = `<strong>${sender} send message in </strong> ${message}`;
         notificationContainer.appendChild(notification);
-        document.getElementById('notification-sound').play();
+        const notificationSound = document.getElementById('notification-sound');
+        if (notificationSound) {
+            notificationSound.play(); // Убедитесь, что звук правильно проигрывается
+        }
         setTimeout(() => {
             notification.remove();
-        }, 4000)
-
-
+        }, 4000);
     }
+
 })
