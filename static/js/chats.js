@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const isInChat = CurrentPage.includes(`/rooms/${ChatRoomId}/`)
     console.log(isInChat)
     const chatSocket = new WebSocket(
-        'wss://' + window.location.host + '/ws/' + ChatRoomName + '/' /// S
+        'ws://' + window.location.host + '/ws/' + ChatRoomName + '/' /// S
     );
 
     chatSocket.onmessage = function (e) {
@@ -18,15 +18,11 @@ document.addEventListener('DOMContentLoaded', function () {
         if (data.message) {
             console.log('Received message to client id', data.message);
             if (data.username !== username) {
-                if (isInChat) {
-                    console.log("Not in chat, showing notification...");
-                    showNotification(data.username, (data.room).replace(/-/g, ' ').replace(/\b\w/g, c => c
-                        .toUpperCase()))
-                    document.getElementById('notification-sound').play()
-                } else {
-                    console.log("не в чате");
-                    document.getElementById('notification-sound').play()
-                }
+
+                showNotification(data.username, (data.room).replace(/-/g, ' ').replace(/\b\w/g, c => c
+                    .toUpperCase()))
+                document.getElementById('notification-sound').play()
+
             } else {
 
                 document.getElementById('sent-sound').play()
