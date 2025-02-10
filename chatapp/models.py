@@ -8,7 +8,7 @@ import uuid
 class Chatroom(models.Model):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True, blank=True)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         if not self.slug:

@@ -19,7 +19,9 @@ def index(request):
 
         if form.is_valid():
 
-            form.save()
+            chatroom = form.save(commit=False)
+            chatroom.owner = request.user
+            chatroom.save()
             messages.success(request, "Chatroom created!")
             return redirect("index")
         else:
@@ -41,7 +43,11 @@ def index(request):
 def chatroom(request, room_id):
     # chatroom = Chatroom.objects.get(slug=slug)
     chatrooms = Chatroom.objects.all()
-    chatroom = get_object_or_404(Chatroom, id=room_id)
+    try:
+        chatroom = Chatroom.objects.get(id=room_id)
+    except Chatroom.DoesNotExist:
+        messages.error(request, "Чат был удален!")
+        return redirect("index")
     chat_messages = ChatMessage.objects.filter(room=chatroom)
     users = chatroom.get_users()
 
@@ -103,8 +109,11 @@ def logoutUser(request):
 
 
 def delete_room(request, id):
-    room = Chatroom.objects.get(id=id)
-    if request.user == room.owner:
-        if request.method == "POST":
-            room.delete()
-            return redirect("index")
+    room = get_object_or_404(Chatroom, id=id)
+    if request.user != room.owner:
+        messages.error(request, "You are not the owner of this room!")
+        return redirect("index")
+
+    room.delete()
+    messages.success(request, "Room was deleted!")
+    return redirect("index")

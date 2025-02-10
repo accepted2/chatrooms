@@ -29,16 +29,31 @@ class ChatConsumer(AsyncWebsocketConsumer):
         username = data["username"]
         room = data["room"]
 
-        await self.channel_layer.group_send(
-            self.room_groupe_name,
-            {
-                "type": "chat_message",
-                "message": message,
-                "username": username,
-                "room": room,
-            },
-        )
-        await self.save_message(username, room, message)
+        room_exists = await self.save_message(username, room, message)
+
+        if not room_exists:
+            await self.send(
+                text_data=json.dumps(
+                    {
+                        "message": "Этот чат был удален.",
+                        "username": "System",
+                        "room": room,
+                    }
+                )
+            )
+            # Ожидаем от клиента закрытие подключения или перенаправление
+            await self.close()
+
+        else:
+            await self.channel_layer.group_send(
+                self.room_groupe_name,
+                {
+                    "type": "chat_message",
+                    "message": message,
+                    "username": username,
+                    "room": room,
+                },
+            )
 
     async def chat_message(self, event):
         message = event["message"]
@@ -59,8 +74,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
     def save_message(self, username, room, message):
         from django.contrib.auth.models import User  # Перемещено сюда
         from .models import Chatroom, ChatMessage  # Добавлен импорт ChatMessage
+        from django.core.exceptions import ObjectDoesNotExist
 
-        user = User.objects.get(username=username)
-        room = Chatroom.objects.get(slug=room)
-
-        ChatMessage.objects.create(user=user, room=room, message=message)
+        try:
+            user = User.objects.get(username=username)
+            room = Chatroom.objects.get(slug=room)
+            ChatMessage.objects.create(user=user, room=room, message=message)
+            return True
+        except ObjectDoesNotExist:
+            print(f"комната {room} больше не существует")
+            return False
