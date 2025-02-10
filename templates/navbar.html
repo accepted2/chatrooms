@@ -17,12 +17,16 @@
                         Channels
                     </a>
                     <ul class="dropdown-menu">
+                        {% if chatrooms %}
                         {% for chatroom in chatrooms %}
                         <li>
-                            {{forloop.counter}}.<a href="{% url 'chatroom'  chatroom.id %}">
-                                {{ chatroom.name }}</a>
+                            <a href="{% url 'chatroom'  chatroom.id %}" class="nav-link">
+                                {{forloop.counter}}. {{ chatroom.name }}</a>
                         </li>
                         {% endfor %}
+                        {% else %}
+                        <h5>No rooms</h5>
+                        {% endif %}
                     </ul>
                 </li>
             </ul>

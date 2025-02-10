@@ -7,7 +7,8 @@
         {% csrf_token %}
         {% for field in form %}
         <label class="form-label mb-1">{{field.label}}</label>
-        <input class="form-control" name="{{field.name}}" type="{{field.label.widget.input_type}}" required>
+        <input class="form-control" name="{{field.name}}" type="{{field.label.widget.input_type}}" required
+            style="font-family: monospace;">
         {% endfor %}
         <button type="submit" class="btn btn-secondary" style="margin-top: 4px;">Register</button>
     </form>

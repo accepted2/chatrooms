@@ -9,4 +9,5 @@ urlpatterns = [
     path("login/", CustomLoginView.as_view(), name="login"),
     path("logout/", views.logoutUser, name="logout"),
     path("rooms/<int:room_id>/", views.chatroom, name="chatroom"),
+    path("delete/<int:id>/", views.delete_room, name="delete_room"),
 ]

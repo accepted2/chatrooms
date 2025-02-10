@@ -100,3 +100,11 @@ def logoutUser(request):
     logout(request)
     messages.info(request, "User was Logged out!")
     return redirect("login")
+
+
+def delete_room(request, id):
+    room = Chatroom.objects.get(id=id)
+    if request.user == room.owner:
+        if request.method == "POST":
+            room.delete()
+            return redirect("index")

@@ -76,6 +76,8 @@ body {
 
 .chat-input-container {
     width: 100%;
+
+
     /* Поле ввода на всю ширину */
 }
 
@@ -96,6 +98,7 @@ body {
     /* Увеличивает высоту поля ввода */
     font-size: 16px;
     /* Делает текст в поле больше */
+    font-family: monospace;
 }
 
 #send-button {
@@ -180,4 +183,21 @@ body {
 
 .notification.hide {
     opacity: 0;
+}
+
+.dropdown-menu {
+    background-color: #a4d8e3;
+}
+
+.dropdown-menu li {
+    color: #f44336;
+
+}
+
+.dropdown-menu a {
+    color: #f44336;
+    font-family: monospace;
+    font-size: large;
+    line-height: 1.2;
+    padding: 4px 10px;
 }

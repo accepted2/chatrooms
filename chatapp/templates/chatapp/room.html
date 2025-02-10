@@ -8,14 +8,21 @@
             style="width: 30%; background-color: #f3f3f3; padding: 15px; border-radius: 10px; overflow-y: auto; max-height: 900px;">
             <h4>Чаты</h4>
             {% for chat in chatrooms %}
-            <div class="chat-item" style="padding: 10px; border-bottom: 1px solid #ddd; cursor: pointer;"
+            <div class="chat-item"
+                style="padding: 10px; border-bottom: 1px solid #ddd; cursor: pointer; display: flex; justify-content: space-between;"
                 onclick="window.location.href='{% url 'chatroom'  chat.id %}'">
                 <strong>{{ chat.name }}</strong>
+                <form method="POST" action="{% url 'delete_room' chat.id %}"
+                    onsubmit="return confirm('Удалить {{chat.name}}?')">
+                    {% csrf_token %}
+                    <button type="submit" style="background: none; border: none; padding:0; cursor: pointer;"><i
+                            class="fa-solid fa-trash" style="color:rgb(191, 115, 115); font-size: 18px;"></i></button>
+                </form>
             </div>
             {% endfor %}
         </div>
         <!-- Основной чат -->
-        <div class="chat-container" style="width: 70%; margin-left: 20px;">
+        <div class=" chat-container" style="width: 70%; margin-left: 20px;">
             <!-- Заголовок чата -->
             <div class="chat-header"
                 style="background-color: #91c788; padding: 15px; font-size: 18px; font-weight: bold; text-align: center; border-radius: 10px 10px 0 0;">
@@ -45,7 +52,8 @@
                     <div class="d-flex">
                         <input id="message-input" type="text" name="message" placeholder="Enter"
                             class="form-control flex-grow-1" />
-                        <button id="send-button" type="submit" class="btn btn-secondary btn-lg ml-2">Send</button>
+                        <button id="send-button" type="submit"
+                            class="btn btn-secondary btn-lg ml-2">Send</button>
                     </div>
                 </form>
             </div>
